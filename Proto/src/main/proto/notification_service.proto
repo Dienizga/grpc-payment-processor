@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package notifications;
+
+option java_package = "com.example.grpc.notifications";
+option java_multiple_files = true;
+option java_outer_classname = "NotificationServiceProto";
+
+service NotificationService {
+  rpc SendNotification (NotificationRequest) returns (NotificationResponse);
+}
+
+message NotificationRequest {
+  string payment_id = 1;
+  int64 user_id = 2;
+  double amount = 3;
+  string message = 4;
+}
+
+message NotificationResponse {
+  bool success = 1;
+  string message = 2;
+}

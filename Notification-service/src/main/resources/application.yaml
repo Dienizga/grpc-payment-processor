@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: notification-service
+
+grpc:
+  server:
+    port: 9091
+
+server:
+  port: 8081

@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: payment-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/user_analytics
+    username: admin
+    password: admin123
+    hikari:
+      maximum-pool-size: 10
+
+  liquibase:
+    enabled: true
+    change-log: classpath:changelog-master.yml
+    drop-first: false
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          batch_size: 20
+
+grpc:
+  client:
+    notification-service:
+      address: static://localhost:9091
+      negotiation-type: plaintext
+  server:
+    port: 9090
+
+outbox:
+  processor:
+    fixed-delay: 5000
+
+server:
+  port: 8080
