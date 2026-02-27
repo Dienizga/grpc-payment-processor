@@ -2,6 +2,7 @@ package com.example.paymentservice.service;
 
 import com.example.grpc.notifications.NotificationServiceGrpc;
 import com.example.grpc.notifications.NotificationRequest;
+import com.example.paymentservice.controller.PaymentController;
 import com.example.paymentservice.entity.OutboxEvent;
 import com.example.paymentservice.entity.OutboxStatus;
 import com.example.paymentservice.entity.Payment;
@@ -77,6 +78,12 @@ public class PaymentService {
                 log.error("Failed to process outbox event: {}", event.getId(), e);
             }
         }
+    }
+
+    @Transactional(readOnly = true)
+    public PaymentController.PaymentStatusResponse getStatus(Long id) {
+        var payment = paymentRepository.getReferenceById(id);
+        return new PaymentController.PaymentStatusResponse(payment.getId(), payment.getStatus().toString());
     }
 
     private void processSingleEvent(OutboxEvent event) {

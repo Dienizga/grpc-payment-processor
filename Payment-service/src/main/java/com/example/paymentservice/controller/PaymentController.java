@@ -28,7 +28,7 @@ public class PaymentController {
 
     @GetMapping("/{paymentId}/status")
     public ResponseEntity<PaymentStatusResponse> getPaymentStatus(@PathVariable Long paymentId) {
-        return ResponseEntity.ok(new PaymentStatusResponse(paymentId, "PENDING"));
+        return ResponseEntity.ok(paymentService.getStatus(paymentId));
     }
 
     public record PaymentStatusResponse(Long paymentId, String status) {}
