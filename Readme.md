@@ -30,3 +30,8 @@
 - Сгенерированные gRPC классы
 
 ### Паттерн Transactional Outbox
+
+### Тестовый курл:
+curl -X POST http://localhost:8080/api/v1/payments \
+-H "Content-Type: application/json" \
+-d '{"userId": 123, "amount": 99.99}'
